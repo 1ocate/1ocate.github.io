@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 return [
-    'baseUrl' => 'https://1ocate.github.io',
+    'baseUrl' => '',
     'production' => false,
     'siteName' => '👣 Struggle',
     'siteDescription' => 'Struggling every day',
