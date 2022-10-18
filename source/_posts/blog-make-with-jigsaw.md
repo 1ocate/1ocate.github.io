@@ -3,7 +3,7 @@ extends: _layouts.post
 section: content
 title: Jigsaw를 사용하여 블로그 만들기
 date: 2022-09-01
-modify_date: 2022-09-03
+modify_date: 2022-10-18
 description: This is your first blog post.
 cover_image: /assets/img/post-cover-image-1.png
 ---
@@ -43,7 +43,10 @@ npm run watch
 ```
 #### 2. Github Page로 배포하기
 
-수정중... 블라블라
+최상위 경로에 ".github/workflows/main.yml" 파일을 생성한 후 아래의 내용을 넣고
+배포가 이루어졌을때 깃헙 페이지 내에서 페이지를 빌드하도록 한다.
+
+
 ```yml
 name: Build & Publish
 
@@ -76,9 +79,3 @@ jobs:
         git push -f origin gh-pages:gh-pages
 ```
 
-
-
-### 블로그, 또 조금하다가 접는거 아니야?
-
-과거에도 여러번 블로그를 만들었었지만, 내용보다 겉 모습에 치중 하였던 기억이 있다.
-내용과 학습에 집중해서 조금씩 만들어갈 예정이다.
