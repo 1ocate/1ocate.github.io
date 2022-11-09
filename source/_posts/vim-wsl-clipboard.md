@@ -3,6 +3,7 @@ extends: _layouts.post
 section: content
 title: WSL에서 Vim의 레지스터 "0 (Yank register)와 윈도우 클립보드와 연동하기
 date: 2022-10-18
+modify: 2022-11-09
 description: This is your first blog post.
 cover_image: 
 ---
@@ -28,7 +29,7 @@ Vim의 레지스터 "0(yank)와 윈도우의 Clipboard를 연결 하는 [방법]
 ```shell
 
 "F9를 토글하여 Vim 레지스터 '"@'와 윈도우 클립보드 연동 활성여부 선택 (기본 활성)
-nnoremap <F9>t :call <SID>WSLYank_toggle()<CR>
+nnoremap <F9> :call <SID>WSLYank_toggle()<CR>
 
 augroup WSLYank_autocmd
 
@@ -55,7 +56,7 @@ augroup WSLYank_autocmd
             if ! v:true == g:wsl_clipboard_enble
                 return
             endif
-            if s:global_yank_cache_0 !=# @0
+            if s:global_yank_cache_0 != @0
                 call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
                 call s:save_cache()
                 return
@@ -63,8 +64,8 @@ augroup WSLYank_autocmd
     endfunction
 
 augroup END
-
 ```
+
 ### 참고
 [Vim: WSL에서 클립보드에 복사하는 방법](https://hidekuma.github.io/vim/wsl/synchronize-system-clipboard-vim-on-WSL/)  
 [Vim 숫자 레지스터 쉬프터 만들기](https://johngrib.github.io/wiki/vim/numbered-register-shift/)
