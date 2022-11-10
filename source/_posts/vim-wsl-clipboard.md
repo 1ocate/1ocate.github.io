@@ -26,7 +26,7 @@ Vim의 레지스터 "0(yank)와 윈도우의 Clipboard를 연결 하는 [방법]
 다음은 완성된 코드이다.  
 [github에서 보기](https://github.com/1ocate/dotfiles/blob/main/nvim/init.vim)
 
-```shell
+```viml
 
 "F9를 토글하여 Vim 레지스터 '"@'와 윈도우 클립보드 연동 활성여부 선택 (기본 활성)
 nnoremap <F9> :call <SID>WSLYank_toggle()<CR>
