@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="This is your first blog post.">
+
+        <meta property="og:title" content="WSL에서 Vim의 레지스터 &quot;0 (Yank register)와 윈도우 클립보드와 연동하기 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/vim-wsl-clipboard"/>
+        <meta property="og:description" content="This is your first blog post." />
+
+        <title>WSL에서 Vim의 레지스터 &quot;0 (Yank register)와 윈도우 클립보드와 연동하기 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                
+    <h1 class="mb-2 leading-none">WSL에서 Vim의 레지스터 &quot;0 (Yank register)와 윈도우 클립보드와 연동하기</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2022-10-18</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <p>터미널을 통해서 Vim을 사용할 때 라인이 길어지게  되면 드레그 복사 하기가 번거로워진다.</p>
+
+<p>Vim의 레지스터 "0(yank)와 윈도우의 Clipboard를 연결 하는 <a href="https://hidekuma.github.io/vim/wsl/synchronize-system-clipboard-vim-on-WSL/">방법</a>은 검색을 통해 쉽게 찾을 수 있다.</p>
+
+<p>다만 한가지 아쉬운 점이 있는데, Yank 할때만 클립보드에 연동되는 것이 아니라<br />
+삭제할 때 Vim 레지스터 ""를 갱신하게 되면서 <strong>의도하지 않은 클립보드 갱신</strong>이 일어나게 되었다.</p>
+
+<p>고민 중에 <a href="https://johngrib.github.io/">기계인간</a>님의 <a href="https://johngrib.github.io/wiki/vim/numbered-register-shift/">Vim 숫자레지스터 쉬프터 만들기</a>라는 글을 보게 되었다.</p>
+
+<p>기계인간님은 내가 겪었던 의도하지 않은 레지스터 갱신을 구별 하기 위해, 특정 레지스터의 기존 값을<br />
+캐시로 변수에 등록하여 이벤트가 발생했을 때 
+해당 레지스터와 값을 비교하여 실제적으로 이벤트가 일어났는지 확인 처리 하셨다.</p>
+
+<p>이를 바탕으로 코드를 조합하였다.</p>
+
+<p>다음은 완성된 코드이다.<br />
+<a href="https://github.com/1ocate/dotfiles/blob/main/nvim/init.vim">github에서 보기</a></p>
+
+<pre><code class="language-viml"><br />"F9를 토글하여 Vim 레지스터 '"@'와 윈도우 클립보드 연동 활성여부 선택 (기본 활성)
+nnoremap &lt;F9&gt; :call &lt;SID&gt;WSLYank_toggle()&lt;CR&gt;
+
+augroup WSLYank_autocmd
+
+    " 초기화
+    let g:wsl_clipboard_enble = 1
+    let s:global_yank_cache_0 = @0
+    let s:clip = '/mnt/c/Windows/System32/clip.exe' 
+
+    if executable(s:clip)
+            autocmd TextYankPost * :call s:WSLYank()
+    end
+
+    function! s:WSLYank_toggle()
+        let g:wsl_clipboard_enble = ! g:wsl_clipboard_enble
+        echom "시스템 클립보드 사용 여부 " . g:wsl_clipboard_enble
+        let s:clip = ''
+    endfunction
+
+    function! s:save_cache()
+        let s:global_yank_cache_0 = @0
+    endfunction
+
+    function! s:WSLYank()
+            if ! v:true == g:wsl_clipboard_enble
+                return
+            endif
+            if s:global_yank_cache_0 != @0
+                call system('echo '.shellescape(join(v:event.regcontents, "\&lt;CR&gt;")).' | '.s:clip)
+                call s:save_cache()
+                return
+            endif
+    endfunction
+
+augroup END
+</code></pre>
+
+<h3>참고</h3>
+
+<p><a href="https://hidekuma.github.io/vim/wsl/synchronize-system-clipboard-vim-on-WSL/">Vim: WSL에서 클립보드에 복사하는 방법</a><br />
+<a href="https://johngrib.github.io/wiki/vim/numbered-register-shift/">Vim 숫자 레지스터 쉬프터 만들기</a></p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/blog-make-with-jigsaw" title="Older Post: Jigsaw를 사용하여 블로그 만들기">
+                    &LeftArrow; Jigsaw를 사용하여 블로그 만들기
+                </a>
+                    </div>
+
+        <div>
+                            <a href="https://1ocate.github.io/glpi-ko" title="Newer Post: Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항">
+                    Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항 &RightArrow;
+                </a>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>

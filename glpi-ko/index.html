@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="This is your first blog post.">
+
+        <meta property="og:title" content="Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/glpi-ko"/>
+        <meta property="og:description" content="This is your first blog post." />
+
+        <title>Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                        <img src="/assets/img/post-cover-image-3.png" alt="Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항 cover image" class="mb-2">
+    
+    <h1 class="mb-2 leading-none">Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2022-10-29</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <p><a href="https://glpi-project.org/">Glpi</a>는 헬프데스크 및 IT 자산을 관리하기 위한 오픈 소스 도구다.</p>
+
+<p>Glpi의 자산리스트에서 내보내기(Export) 할때 PDF, SLK, CSV등의 파일로 저장할 수 있는데,<br />
+만약 한글로 작성한 데이터가 있다면 아래의 이미지와 같이 한글이 '???'로 나오게 된다.</p>
+
+<p><img src="/assets/img/post-3-1.png" alt="export_pdf_korean_problem" /></p>
+
+<h3>해결방법</h3>
+
+<p>1) 우측 상단에 프로필 누르고 "내 설정" 클릭
+<img src="/assets/img/post-3-2.png" alt="mysetting" /></p>
+
+<p>2) "PDF" 내보내기 글꼴 선택 후 "Sung"을 입력해서 나온 한글폰트 2개 중 적절한 폰트 선택
+<img src="/assets/img/post-3-3.png" alt="select_pdf_font" /></p>
+
+<p>3) 선택 후 출력 테스트
+<img src="/assets/img/post-3-4.png" alt="solve_problem" /></p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/vim-wsl-clipboard" title="Older Post: WSL에서 Vim의 레지스터 &quot;0 (Yank register)와 윈도우 클립보드와 연동하기">
+                    &LeftArrow; WSL에서 Vim의 레지스터 &quot;0 (Yank register)와 윈도우 클립보드와 연동하기
+                </a>
+                    </div>
+
+        <div>
+                            <a href="https://1ocate.github.io/git-hook-script" title="Newer Post: 특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기">
+                    특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기 &RightArrow;
+                </a>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>

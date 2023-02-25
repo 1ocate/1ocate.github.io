@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="Wezterm 설정 공유">
+
+        <meta property="og:title" content="WSL사용시 Wezterm설정 Windows와 공유하는법 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/wezterm-wsl"/>
+        <meta property="og:description" content="Wezterm 설정 공유" />
+
+        <title>WSL사용시 Wezterm설정 Windows와 공유하는법 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                
+    <h1 class="mb-2 leading-none">WSL사용시 Wezterm설정 Windows와 공유하는법</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2023-02-25</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <p><a href="https://wezfurlong.org/wezterm/">wezterm</a>은 윈도우, 리눅스, 맥에서 사용할 수 있는 러스트기반의 터미널이다.</p>
+
+<p>Windows에서 Wezterm 사용시 Windows에서 설정을 관리하기에 WSL에서 관리가 안되는 문제가 있다.
+WSL에서 먼저 'git clone' 이후 수동으로 복사해서 Windows 현재 사용자 디렉토리에 복사해서 넣어줘야 
+다른 기기에서 수정된 설정을 사용할 수 있다.</p>
+
+<h2>해결</h2>
+
+<p>mklink는 Windows 심볼릭 링크 명령어이다.
+WSL 디렉토리를 네트워크 경로를 통해 접근 가능하므로 네트워크 경로의 파일을
+심볼릭 링크 걸어주면, git 으로 관리중인 설정파일에 접근이 가능하다.</p>
+
+<p>Widnows cmd에서 아래 명령 실행</p>
+
+<pre><code class="language-DOS"><br /># Windows 홈 디렉토리로 이동 (.wezterm.lua 경로)
+cd %userprofile% 
+rename ".wezter.lua" ".wezterm.lua_bak"
+mklink  .wezterm.lua  \\wsl$\Ubuntu\home\locate\.dotfiles\.wezter.lua
+
+</code></pre>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/bye-2022" title="Older Post: 2022년 돌아보기">
+                    &LeftArrow; 2022년 돌아보기
+                </a>
+                    </div>
+
+        <div>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>

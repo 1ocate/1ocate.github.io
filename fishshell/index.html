@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="This is your first blog post.">
+
+        <meta property="og:title" content="Fish shell 세팅 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/fishshell"/>
+        <meta property="og:description" content="This is your first blog post." />
+
+        <title>Fish shell 세팅 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                
+    <h1 class="mb-2 leading-none">Fish shell 세팅</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2022-12-04</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <h1>설치(Silicon Mac)</h1>
+
+<pre><code class="language-bash"><br />brew install fish
+
+# 쉘 등록
+sudo echo '/opt/homebrew/bin/fish' &gt;&gt; sudo /etc/shells &gt; /dev/null
+
+# 기본 쉘 변경
+
+chsh -s /opt/homebrew/bin/fish
+
+# fish 경로 추가
+fish_add_path /opt/homebrew/bin
+
+#fisher 설치 
+curl -sL https://git.io/fisher | source &amp;&amp; fisher install jorgebucaran/fisher
+
+#powerline theme
+fisher install IlanCosman/tide@v5
+
+#fzf 플러그인 의존성 해결
+brew install fd
+brew install bat
+brew install fzf
+
+#fzf 플러그인 설치
+fisher install PatrickF1/fzf.fish
+
+
+
+
+
+
+
+</code></pre>
+
+<h3>참고</h3>
+
+<p><a href="https://www.lesstif.com/lpt/sudo-echo-permission-denied-89556053.html">sudo echo 명령어 사용시 Permission denied 문제 해결하기</a><br />
+<a href="https://gist.github.com/gagarine/cf3f65f9be6aa0e105b184376f765262">Installing Fish shell on MacOS (Intel and M1) using brew
+</a></p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/202211-story" title="Older Post: 11월 회고">
+                    &LeftArrow; 11월 회고
+                </a>
+                    </div>
+
+        <div>
+                            <a href="https://1ocate.github.io/wezterm-keybinding" title="Newer Post: Wezterm에서 Vim 비주얼 블럭모드(ctrl + q) 한번에 입력이 안될 경우">
+                    Wezterm에서 Vim 비주얼 블럭모드(ctrl + q) 한번에 입력이 안될 경우 &RightArrow;
+                </a>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>

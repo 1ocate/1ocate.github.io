@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="This is your first blog post.">
+
+        <meta property="og:title" content="특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/git-hook-script"/>
+        <meta property="og:description" content="This is your first blog post." />
+
+        <title>특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                
+    <h1 class="mb-2 leading-none">특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2022-11-01</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <p>현재 회사에서 크게 3가지 단계로 검증 후 운영서버에 배포하고 있다.</p>
+
+<p>Local 브랜치 > Stage 브랜치 > Deploy 브랜치 > 운영서버 배포</p>
+
+<p>작업을 진행할 때 Local 브랜치 및 Stage 브랜치에서는 Git 컨벤션에 맞게 커밋 메세지를 만들고,
+배포전 단계인 Deploy 브랜치에 커밋을 생성할 때 해당 커밋 메세지를 수정하여 Deploy를 넣어준다.<br />
+예) Deploy : xxx 항목 제거</p>
+
+<p>이후 변경된 파일 내역과 함께 배포요청을 하면, 담당자가 운영서버로 배포하게 된다.</p>
+
+<p>나는 보통 Local 브랜치에서 커밋 메세지를 만들고, Stage에 cherry-pick을 한다음 검수가 완료되면
+Deploy에 동일하게 cherry-pick을 한 후에 <code>git commit --amend</code> 하여 "Deploy" 단어를 추가하고 커밋해서 푸시하였다.</p>
+
+<pre><code>이번에는 그냥 배포하지만 다음부터는 Git 컨벤션을 지켜주시겠어요?
+</code></pre>
+
+<p>나름 내부의 룰을 잘 지킨다고 생각하고 있었는데, 배포 담당자에게 Deploy 브랜치 커밋에 "Deploy"라는 단어가 포함되지 않았다는 이야기를 들었다.</p>
+
+<p>확인해보니, cherry-pick 이후에 커밋 메세지 수정을 잊었던 경우가 종종 있었고, 반복되다보니 담당자가 이야기를 해준 것이였다.</p>
+
+<h3>문제</h3>
+
+<p>특정 브랜치에 요구되는 커밋 조건이 있는데, cherry-pick으로 다른브랜치의 커밋을 가져와서 푸시하는 경우 커밋을 수정하는 것을 잊을 때가 많다.</p>
+
+<h3>해결방법</h3>
+
+<p>특정 브랜치에 요구되는 커밋 조건을 확인하여 조건에 부합하지 않으면 푸시 제한을 하게 하면 어떨까?</p>
+
+<p>Git 정책에 <a href="https://git-scm.com/book/ko/v2/Git%EB%A7%9E%EC%B6%A4-%EC%A0%95%EC%B1%85-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0">관련</a>된 예제를 확인해보니
+<a href="https://git-scm.com/book/ko/v2/Git%EB%A7%9E%EC%B6%A4-Git-Hooks">Git Hook</a>으로 각 조건에 따라 스크립트를 사용 할 수 있는 것을 알게 되었다.</p>
+
+<p>이번 문제는 cherry-pick 후 push 할때 스크립트를 실행해야 하므로 pre-push를 사용하였다.</p>
+
+<blockquote>
+  <p>pre-push 훅은 git push 명령을 실행하면 동작하는데 리모트 정보를 업데이트 하고 난 후 리모트로 데이터를 전송하기 전에 동작한다.<br />
+  리모트의 이름과 주소를 파라미터로 전달받으며 stdin 을 통해 업데이트 할 해시 리스트를 전달받는다. 
+  Push 하기 전에 커밋이 유효한지 확인하는 용도로 사용할 수 있다. 
+  훅에서 0이 아닌 값을 반환하면 Push를 중지시킨다.</p>
+</blockquote>
+
+<p>그리고 다음의 경로에 아래의 내용을 넣었다. "Project_name/.git/hooks/pre-push"</p>
+
+<pre><code class="language-bash"><br />#!/bin/bash
+
+branch=(`git branch --show-current`)
+zero=$(git hash-object --stdin &lt;/dev/null | tr '[0-9a-f]' '0')
+
+if test "$branch" = "DEPLOY"
+then
+    while read local_ref local_oid remote_ref remote_oid
+    do
+        # 리모트 서버에 푸시 할 것이 없으면 그대로 종료
+        if test "$local_oid" = "$zero"
+        then
+            # Handle delete
+            :
+        else
+            # 커밋이 1개인지 범위인지 확인
+            if test "$remote_oid" = "$zero"
+            then
+                # New branch, examine all commits
+                range="$local_oid"
+            else
+                # Update to existing branch, examine new commits
+                range="$remote_oid..$local_oid"
+            fi
+
+            # 커밋 메세지 체크
+            SHA1s=(`git rev-list $range`)
+            for SHA1 in "${SHA1s[@]}"
+            do
+                #Hash 값을 통해 커밋 메세지 가져오기
+                commit=$(git cat-file commit "$SHA1" | sed '1,/^$/d')
+                check_commit=$(echo $commit | grep -i "$branch" )
+
+                # 커밋에 특정 브랜치 푸시에 필요한 내용 체크
+                if ! test -n "$check_commit"
+                then
+                    # 특정문자를 포함하지 않는 커밋의 Hash 저장
+                    errors+=("&lt;$SHA1&gt; $commit")
+                fi
+            done
+
+            # 조건에 맞지 않으면 해당 커밋을 출력하고 종료
+            if  test -n "$errors"
+            then
+
+                echo &gt;&amp;2 "Found commit message not include $branch, not pushing"
+                for  error in "${errors[@]}"
+                do
+                    echo "$error"
+                done
+                exit 1
+            fi
+        fi
+    done
+fi
+
+exit 0 
+
+</code></pre>
+
+<p>이제 특정 브랜치(위의 예시에서는 DEPLOY)에 cherry-pick 후 push 할때 커밋에 특정 문구 (위의 예시에서는 Deploy)가 포함되지 않으면 해당 커밋을 출력해주고 푸시가 되지 않는다.</p>
+
+<h3>참고</h3>
+
+<p><a href="https://git-scm.com/book/ko/v2/Git%EB%A7%9E%EC%B6%A4-Git-Hooks">Git맞춤 - Git Hooks</a> 
+<a href="https://git-scm.com/book/ko/v2/Git%EB%A7%9E%EC%B6%A4-%EC%A0%95%EC%B1%85-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0">Git맞춤 - 정책 구현하기</a></p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/glpi-ko" title="Older Post: Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항">
+                    &LeftArrow; Glpi에서 pdf로 리스트 다운로드 할때 한글이 &#039;???&#039;등으로  깨질 경우 확인 사항
+                </a>
+                    </div>
+
+        <div>
+                            <a href="https://1ocate.github.io/202211-story" title="Newer Post: 11월 회고">
+                    11월 회고 &RightArrow;
+                </a>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>

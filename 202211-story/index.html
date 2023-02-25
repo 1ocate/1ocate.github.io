@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="This is your first blog post.">
+
+        <meta property="og:title" content="11월 회고 | 👣 Struggle"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://1ocate.github.io/202211-story"/>
+        <meta property="og:description" content="This is your first blog post." />
+
+        <title>11월 회고 | 👣 Struggle</title>
+
+        <link rel="home" href="https://1ocate.github.io">
+        <!--<link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="👣 Struggle Atom Feed">-->
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=7cdc98e3a6f4a0c56b913899c7e48387">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJP8VN27S5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-YJP8VN27S5');
+        </script>
+
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen font-sans leading-normal text-gray-800 bg-gray-100">
+        <header class="flex items-center h-24 py-4 bg-white border-b shadow" role="banner">
+            <div class="container flex items-center px-4 mx-auto max-w-8xl lg:px-8">
+                <div class="flex items-center">
+                    <a href="/" title="👣 Struggle home" class="inline-flex items-center">
+                        <h1 class="my-0 text-lg font-semibold text-blue-800 md:text-2xl hover:text-blue-600">👣 Struggle</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex items-center justify-end flex-1">
+                    <search></search>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!--<nav id="js-nav-menu" class="hidden w-auto px-2 pt-6 pb-2 bg-gray-200 shadow lg:hidden">
+    <ul class="my-0">
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Blog"
+                href="/blog"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Blog</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle About"
+                href="/about"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >About</a>
+        </li>
+        <li class="pl-4">
+            <a
+                title="👣 Struggle Contact"
+                href="/contact"
+                class="block mt-0 mb-4 text-sm no-underline text-gray-800 hover:text-blue-500"
+            >Contact</a>
+        </li>
+    </ul>
+</nav>
+-->
+
+        <main role="main" class="container flex-auto w-full max-w-4xl px-6 py-16 mx-auto">
+                
+    <h1 class="mb-2 leading-none">11월 회고</h1>
+
+    <p class="text-xl text-gray-700 md:mt-0">1ocate  •  2022-11-26</p>
+
+    
+    <div class="pb-4 mb-10 border-b border-blue-200" v-pre>
+        <p>11월에 있었던 일들을 간단히 회고</p>
+
+<h1>이사</h1>
+
+<p>날씨가 추워지기전 이사를 완료하기 위해 고군분투 했다.</p>
+
+<p>그렇게 11월 첫주에 이사를 했는데, 오늘까지 날씨 통틀어서 가장 추운 날이였다.</p>
+
+<p><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=187823405">커리어스킬</a>에 나오는 '총구가 뒤에서 겨누는' 상황 인것 같지만 
+이사를 통해 좀 더 열심히 일하고 공부하게 되었다.</p>
+
+<p>드디어 나만의 책상이 생겼다!</p>
+
+<h1><a href="https://github.com/1ocate/yankclip.vim">Vim 플러그인 제작</a></h1>
+
+<p><img src="https://user-images.githubusercontent.com/29521447/202831340-3574ec2f-17dd-4eea-8439-1ffe7ec9b6c9.gif" alt="yankclip" /></p>
+
+<p>yankclip은 <a href="/vim-wsl-clipboard/">WSL에서 Vim의 레지스터 "0 (Yank register)와 윈도우 클립보드와 연동하기</a>를 플러그인화 시킨 것이다.</p>
+
+<p>혼자 쓸때는 몰랐는데, 플러그인으로 만들면서 공개하는 만큼 대충해서는 안된다는 생각이 들었다.</p>
+
+<p>':y'와 ':d'를 구분하기위해 캐시를 두었지만, 같은 값을 ':y' 혹은 ':d' 하였을 때는 갱신이 안되는 문제가 있어서 고심 중이다.</p>
+
+<!--
+회사에서는 [WSL](https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4%EC%9A%A9_%EC%9C%88%EB%8F%84%EC%9A%B0_%ED%95%98%EC%9C%84_%EC%8B%9C%EC%8A%A4%ED%85%9C), 집에서는 MAC OS를 사용하면서 터미널을 띄우고 NeoVim을 사용중인데, 터미널에서 실행한 Vim의 내용을 클립보드로 복사하고 싶었다.
+
+터미널의 크기보다 코드나, 텍스트 라인이 길 경우에 마우스로 드래그 하거나, 화면을 계속 이동시켜서 Vim의 내용을 복사하는게 까다로웠다.
+
+물론 MAC에서는 터미널의 Vim의 "+ 레지스터가 맥의 클립보드와 연결 되어있기 때문에 yank 할때 "+ 레지스터로 넣어주기만 하면 된다.
+
+## 참고
+[vim-레지스터에-관해](https://soooprmx.com/vim-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0%EC%97%90-%EA%B4%80%ED%95%B4/)
+ 
+WSL에서는 윈도우 안에 linux를 띄운 형식이기에, "+ 레지스터를 사용할 수 없다.
+
+해결 방법으로는 Vim의autocmd 'TextYankPost'를 이용하여 '/mnt/c/Windows/System32/clip.exe' 명령에 넣어주면 되는데
+문제는 'TextYankPost'는 'Yank', 'dd' 일때 실행되게 된다.  즉 라인을 삭제해도 실행하게 된다.
+
+Vim에서는 복사, 삭제를 각각의 레지스터로 저장하는데 클립보드는 한공간에 저장되므로 의도하지 않게 클립보드 내용이 날아가게 된다.
+이 문제를 해결하기 위해 
+-->
+
+<h1>larvel 실무</h1>
+
+<p>회사에서 레거시 유지보수만 하다가, 고도화 작업을 하면서 드디어 larvel도 사용해보고 있다.
+이번에 라라벨을 처음하는 건 아니지만, 다시 차근차근하게 보고있다.</p>
+
+<p>약점인 <a href="https://dev-coco.tistory.com/97">Rest API</a>를 만들고 개선 할 수 있는 좋은 기회가 되길 기대한다.</p>
+
+<h1>방황과 고민, 답.</h1>
+
+<p>무엇이라도 해야하는데 결정하지 못하고 우왕좌왕하는 시간이 많았던 올해이다.</p>
+
+<p>방황하지만 우리는 언제나 답을 알고 있다.</p>
+
+<p>'운동 해야지'
+'공부 해야지'
+'계획세워야지'
+'꾸준하게 해야지'</p>
+
+<p>10년을 어영부영 보냈다면 이미 답을 내야하지 않을까?
+10년을 잘 못썼다는 생각 이전에 바로 지금, 하루에 1분, 5분, 10분 내가 변화하고 싶은 부분에 대한 노력이 있는가?</p>
+
+<p>시간이 가는 것에 조급하지 말고, 지금 단 1분이라도 어떻게 쓸까 고민 해보는게 좋지 않을까?</p>
+
+<p>아직 한달이라는 시간이 남았다.</p>
+
+<p>가장 중요한 것은 비관하지 말것, 하루, 한달, 1년전 자신을 비교하되 타인과 절대 비교하지 말것.</p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://1ocate.github.io/git-hook-script" title="Older Post: 특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기">
+                    &LeftArrow; 특정 브랜치에 특정 커밋 메세지를 포함 하지 않는 경우 푸시 제어하기
+                </a>
+                    </div>
+
+        <div>
+                            <a href="https://1ocate.github.io/fishshell" title="Newer Post: Fish shell 세팅">
+                    Fish shell 세팅 &RightArrow;
+                </a>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="py-4 mt-12 text-sm text-center bg-white" role="contentinfo">
+            <ul class="flex flex-col justify-center list-none md:flex-row">
+                <li class="md:mr-2">
+                    &copy; <a href="#" title="1ocate website">1ocate</a> 2023
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=7cd32acaee159c7e5f752f46816d461b"></script>
+
+            </body>
+</html>
